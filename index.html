@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dhainagar High School - Portal</title>
+<style>
+/* ======================== 
+   Global Styles 
+======================== */
+* { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
+body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+
+/* Main Container */
+.container { background: #ffffff; width: 90%; max-width: 450px; padding: 30px 20px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); text-align: center; overflow: hidden; position: relative; }
+
+/* ======================== 
+   School Header & Logo 
+======================== */
+.school-header { margin-bottom: 25px; }
+.logo-container { width: 90px; height: 90px; margin: 0 auto 15px auto; border-radius: 50%; padding: 5px; background: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); animation: pulse 2s infinite; }
+.school-logo { width: 100%; height: 100%; object-fit: contain; }
+
+.header-text h2 { font-size: 22px; color: #1565C0; margin-bottom: 5px; text-transform: uppercase; }
+.header-text h3 { font-size: 14px; color: #555; font-weight: normal; }
+
+/* Logo Animation */
+@keyframes pulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(21, 101, 192, 0.4); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(21, 101, 192, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(21, 101, 192, 0); }
+}
+
+/* ======================== 
+   Login Section 
+======================== */
+#loginSection { display: block; }
+.input-group { margin-bottom: 15px; text-align: left; position: relative; }
+.input-group label { display: block; font-size: 13px; font-weight: bold; color: #333; margin-bottom: 5px; }
+.input-group input { width: 100%; padding: 10px 12px; font-size: 15px; border: 1px solid #ccc; border-radius: 6px; outline: none; transition: border-color 0.3s; }
+.input-group input:focus { border-color: #1565C0; }
+
+/* Password Eye Icon */
+.eye-icon { position: absolute; right: 12px; top: 32px; cursor: pointer; color: #666; font-size: 18px; user-select: none; }
+
+/* Captcha Box */
+.captcha-box { background: #f0f4f8; padding: 10px; border-radius: 6px; margin-bottom: 10px; display: flex; justify-content: center; align-items: center; gap: 15px; border: 1px dashed #1565C0; }
+.captcha-code { font-size: 22px; font-weight: bold; letter-spacing: 5px; color: #c62828; font-family: 'Courier New', Courier, monospace; text-decoration: line-through; user-select: none; }
+.refresh-captcha { cursor: pointer; color: #1565C0; font-size: 20px; font-weight: bold; }
+
+/* ======================== 
+   Dashboard Section (Buttons) 
+======================== */
+#dashboardSection { display: none; }
+.dashboard-title { font-size: 16px; color: #333; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px dashed #ddd; }
+
+.action-btn { display: block; width: 100%; padding: 12px; margin-bottom: 15px; font-size: 15px; font-weight: bold; color: white; background: #1565C0; border: none; border-radius: 6px; cursor: pointer; text-decoration: none; transition: background 0.3s, transform 0.1s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+.action-btn:hover { background: #0D47A1; }
+.action-btn:active { transform: scale(0.98); }
+
+/* Specific Button Colors */
+.btn-xi { background: #2e7d32; }
+.btn-xi:hover { background: #1b5e20; }
+.btn-reg { background: #e65100; }
+.btn-reg:hover { background: #bf360c; }
+.btn-logout { background: #c62828; margin-top: 25px; }
+.btn-logout:hover { background: #b71c1c; }
+
+/* ======================== 
+   Custom Popup Modal 
+======================== */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 9999; backdrop-filter: blur(2px); }
+.modal-box { background: #fff; padding: 25px; border-radius: 8px; max-width: 320px; width: 90%; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3); border-top: 5px solid #d32f2f; animation: popIn 0.3s ease-out; }
+.modal-title { color: #d32f2f; margin-top: 0; font-size: 18px; margin-bottom: 10px; }
+.modal-text { font-size: 14px; color: #333; margin-bottom: 20px; line-height: 1.4; font-weight: bold; }
+.modal-btn { background: #d32f2f; color: white; border: none; padding: 8px 25px; border-radius: 4px; font-size: 14px; cursor: pointer; font-weight: bold; width: auto; }
+.modal-btn:hover { background: #b71c1c; }
+
+@keyframes popIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+</style>
+</head>
+<body>
+
+<!-- Custom Modal -->
+<div id="customModal" class="modal-overlay">
+  <div class="modal-box">
+    <h3 class="modal-title">সতর্কবার্তা</h3>
+    <div id="modalMsg" class="modal-text"></div>
+    <button class="modal-btn" onclick="closeModal()">ঠিক আছে (OK)</button>
+  </div>
+</div>
+
+<div class="container">
+  
+  <!-- Common Header -->
+  <div class="school-header">
+    <div class="logo-container">
+      <!-- Drive Logo Link or local image link can be used here -->
+      <img src="https://drive.google.com/thumbnail?id=1kL6r0VnNS1owRNkBsXabtXJ8JbgH4Bpx&sz=w300" onerror="this.src='https://via.placeholder.com/90?text=Logo';" alt="School Logo" class="school-logo">
+    </div>
+    <div class="header-text">
+      <h2>DHAINAGAR HIGH SCHOOL</h2>
+      <h3>School Management Portal</h3>
+    </div>
+  </div>
+
+  <!-- Login Section -->
+  <div id="loginSection">
+    <div class="input-group">
+      <label for="password">পাসওয়ার্ড (Password)</label>
+      <input type="password" id="password" placeholder="পাসওয়ার্ড লিখুন">
+      <span class="eye-icon" id="togglePassword" onclick="togglePass()">👁️</span>
+    </div>
+
+    <div class="captcha-box">
+      <span class="captcha-code" id="captchaDisplay">----</span>
+      <span class="refresh-captcha" onclick="generateCaptcha()" title="Reload Captcha">↻</span>
+    </div>
+
+    <div class="input-group">
+      <label for="captchaInput">ক্যাপচা লিখুন (Enter Captcha)</label>
+      <!-- inputmode="numeric" ensures Numpad opens on mobile -->
+      <input type="number" inputmode="numeric" pattern="[0-9]*" id="captchaInput" placeholder="৪ ডিজিটের নম্বর লিখুন">
+    </div>
+
+    <button class="action-btn" onclick="handleLogin()">প্রবেশ করুন (Login)</button>
+  </div>
+
+  <!-- Dashboard Section -->
+  <div id="dashboardSection">
+    <div class="dashboard-title">দয়া করে আপনার প্রয়োজনীয় অপশনটি নির্বাচন করুন:</div>
+    
+    <!-- Link 1 (Linked to your Apps Script) -->
+    <a href="https://script.google.com/macros/s/AKfycbx9uAClmA7YUO1G_MFS7Ekzp8C4StuDK2BtsfkQmzXO57o6y0WcxqtzjS7vkiq8VTpU/exec" class="action-btn" target="_blank">Admission Form (Class V to IX)</a>
+    
+    <!-- Link 2 (Indicator) -->
+    <a href="#" class="action-btn btn-xi" onclick="showAlert('লিংকটি এখনও যুক্ত করা হয়নি।')">Admission Form (Class XI)</a>
+    
+    <!-- Link 3 (Indicator) -->
+    <a href="#" class="action-btn btn-reg" onclick="showAlert('লিংকটি এখনও যুক্ত করা হয়নি।')">Registration Form (Class IX)</a>
+    
+    <!-- Logout -->
+    <button class="action-btn btn-logout" onclick="handleLogout()">লগআউট করুন (Logout)</button>
+  </div>
+
+</div>
+
+<script>
+// Global Variable for Captcha
+let currentCaptcha = "";
+
+// Generate 4 Digit Captcha
+function generateCaptcha() {
+  currentCaptcha = Math.floor(1000 + Math.random() * 9000).toString();
+  document.getElementById("captchaDisplay").innerText = currentCaptcha;
+  document.getElementById("captchaInput").value = ""; // Clear input box when reloaded
+}
+
+// Window Onload Generate Captcha
+window.onload = function() {
+  generateCaptcha();
+};
+
+// Toggle Password Visibility
+function togglePass() {
+  var passField = document.getElementById("password");
+  var toggleIcon = document.getElementById("togglePassword");
+  
+  if (passField.type === "password") {
+    passField.type = "text";
+    toggleIcon.style.color = "#1565C0"; // Highlight color when visible
+  } else {
+    passField.type = "password";
+    toggleIcon.style.color = "#666";
+  }
+}
+
+// Custom Modal Functions
+function showAlert(message) {
+  document.getElementById("modalMsg").innerText = message;
+  document.getElementById("customModal").style.display = "flex";
+}
+function closeModal() {
+  document.getElementById("customModal").style.display = "none";
+}
+
+// Login Handler
+function handleLogin() {
+  var pass = document.getElementById("password").value.trim();
+  var capInput = document.getElementById("captchaInput").value.trim();
+
+  // Empty check
+  if (pass === "" || capInput === "") {
+    showAlert("দয়া করে পাসওয়ার্ড এবং ক্যাপচা উভয়ই পূরণ করুন।");
+    return;
+  }
+
+  // Captcha Check
+  if (capInput !== currentCaptcha) {
+    showAlert("ভুল ক্যাপচা দিয়েছেন! দয়া করে সঠিক ক্যাপচা নম্বরটি লিখুন।");
+    document.getElementById("captchaInput").value = ""; // Clear Wrong Captcha
+    generateCaptcha(); // Generate new captcha as security measure
+    return;
+  }
+
+  // Password Check
+  if (pass !== "School@Dhs#2026") {
+    showAlert("ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিয়ে আবার চেষ্টা করুন।");
+    document.getElementById("password").value = ""; // Clear Wrong Password
+    document.getElementById("captchaInput").value = "";
+    generateCaptcha(); // Reload Captcha on fail
+    return;
+  }
+
+  // Success: Hide Login, Show Dashboard
+  document.getElementById("loginSection").style.display = "none";
+  document.getElementById("dashboardSection").style.display = "block";
+  
+  // Clear fields for security after successful login
+  document.getElementById("password").value = "";
+  document.getElementById("captchaInput").value = "";
+}
+
+// Logout Handler
+function handleLogout() {
+  // Hide Dashboard, Show Login
+  document.getElementById("dashboardSection").style.display = "none";
+  document.getElementById("loginSection").style.display = "block";
+  
+  // Change password field type back to password if it was text
+  var passField = document.getElementById("password");
+  passField.type = "password";
+  document.getElementById("togglePassword").style.color = "#666";
+
+  // Generate a fresh Captcha
+  generateCaptcha();
+}
+</script>
+
+</body>
+</html>
