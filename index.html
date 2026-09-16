@@ -9,7 +9,7 @@
    Global Styles 
 ======================== */
 * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
-body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow-y: auto; padding: 20px 0; }
 
 /* ======================== 
    Welcome Page Styles 
@@ -20,22 +20,23 @@ body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); height: 100vh; ove
   align-items: center; 
   justify-content: center; 
   width: 100%; 
-  height: 100%; 
+  min-height: 100vh; 
   background: linear-gradient(135deg, #1565C0, #0D47A1); 
-  position: absolute; 
+  position: fixed; 
   top: 0; 
   left: 0; 
   z-index: 50; 
   transition: opacity 0.8s ease, transform 0.8s ease; 
+  padding: 20px;
 }
 
-.welcome-content { text-align: center; color: white; animation: fadeIn 1s ease-in-out; }
+.welcome-content { text-align: center; color: white; animation: fadeIn 1s ease-in-out; max-width: 90%; }
 
 .welcome-logo { 
-  width: 120px; 
-  height: 120px; 
+  width: 130px; 
+  height: 130px; 
   object-fit: contain; 
-  margin-bottom: 20px; 
+  margin-bottom: 25px; 
   background: white; 
   border-radius: 50%; 
   padding: 10px; 
@@ -43,8 +44,8 @@ body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); height: 100vh; ove
   animation: float 3s ease-in-out infinite; 
 }
 
-.welcome-title { font-size: 28px; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
-.welcome-subtitle { font-size: 16px; color: #bbdefb; margin-bottom: 40px; }
+.welcome-title { font-size: 24px; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+.welcome-subtitle { font-size: 15px; color: #bbdefb; margin-bottom: 40px; }
 
 .btn-enter { 
   background: white; 
@@ -66,7 +67,7 @@ body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); height: 100vh; ove
 /* ======================== 
    Main Container (Login & Dashboard) 
 ======================== */
-.container { background: #ffffff; width: 90%; max-width: 450px; padding: 30px 20px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); text-align: center; position: relative; display: none; opacity: 0; animation: popUp 0.6s forwards; }
+.container { background: #ffffff; width: 90%; max-width: 450px; padding: 30px 20px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); text-align: center; position: relative; display: none; opacity: 0; animation: popUp 0.6s forwards; margin: auto; }
 
 @keyframes popUp { 0% { transform: scale(0.9); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 
@@ -74,7 +75,7 @@ body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); height: 100vh; ove
 .school-header { margin-bottom: 25px; }
 .logo-container { width: 90px; height: 90px; margin: 0 auto 15px auto; border-radius: 50%; padding: 5px; background: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); animation: pulse 2s infinite; }
 .school-logo { width: 100%; height: 100%; object-fit: contain; }
-.header-text h2 { font-size: 22px; color: #1565C0; margin-bottom: 5px; text-transform: uppercase; }
+.header-text h2 { font-size: 20px; color: #1565C0; margin-bottom: 5px; text-transform: uppercase; }
 .header-text h3 { font-size: 14px; color: #555; font-weight: normal; }
 
 @keyframes pulse {
@@ -98,9 +99,9 @@ body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); height: 100vh; ove
 
 /* Dashboard Section */
 #dashboardSection { display: none; }
-.dashboard-title { font-size: 16px; color: #333; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px dashed #ddd; }
+.dashboard-title { font-size: 15px; color: #333; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px dashed #ddd; }
 
-.action-btn { display: block; width: 100%; padding: 12px; margin-bottom: 15px; font-size: 15px; font-weight: bold; color: white; background: #1565C0; border: none; border-radius: 6px; cursor: pointer; transition: background 0.3s, transform 0.1s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+.action-btn { display: block; width: 100%; padding: 12px; margin-bottom: 15px; font-size: 14px; font-weight: bold; color: white; background: #1565C0; border: none; border-radius: 6px; cursor: pointer; transition: background 0.3s, transform 0.1s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-decoration: none;}
 .action-btn:hover { background: #0D47A1; }
 .action-btn:active { transform: scale(0.98); }
 .btn-xi { background: #2e7d32; }
@@ -120,13 +121,20 @@ body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); height: 100vh; ove
 /* ======================== 
    Iframe Application View 
 ======================== */
-#appView { display: none; width: 100%; height: 100vh; flex-direction: column; background: #fff; position: absolute; top:0; left:0; z-index: 100;}
+#appView { display: none; width: 100%; height: 100vh; flex-direction: column; background: #fff; position: fixed; top:0; left:0; z-index: 100;}
 .app-header { background: #1565C0; color: white; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 10; }
-.app-header-title { font-weight: bold; font-size: 16px; }
-.app-btn-logout { background: #c62828; color: white; border: none; padding: 6px 15px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 13px; }
+.app-header-title { font-weight: bold; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 50%;}
+.app-btn-logout { background: #c62828; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 12px; }
 .app-btn-logout:hover { background: #b71c1c; }
 #appIframe { flex-grow: 1; width: 100%; border: none; background: #f2f4f8; }
 
+/* Responsive text for very small screens */
+@media (max-width: 360px) {
+  .header-text h2 { font-size: 18px;}
+  .welcome-title { font-size: 20px;}
+  .welcome-subtitle { font-size: 14px;}
+  .app-header-title { font-size: 13px;}
+}
 </style>
 </head>
 <body>
@@ -143,10 +151,9 @@ body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); height: 100vh; ove
 <!-- Welcome Section -->
 <div id="welcomeSection">
   <div class="welcome-content">
-    <!-- Using the specific logo you requested for Welcome Page -->
     <img src="Picsart_26-09-13_11-05-08-137.png" onerror="this.src='https://drive.google.com/thumbnail?id=1kL6r0VnNS1owRNkBsXabtXJ8JbgH4Bpx&sz=w300';" alt="Welcome Logo" class="welcome-logo">
     <h1 class="welcome-title">Welcome to</h1>
-    <h2 style="font-size: 22px; margin-bottom: 5px;">DHAINAGAR HIGH SCHOOL [H.S.]</h2>
+    <h2 style="font-size: 20px; margin-bottom: 5px;">DHAINAGAR HIGH SCHOOL [H.S.]</h2>
     <p class="welcome-subtitle">Online Admission Portal</p>
     <button class="btn-enter" onclick="enterPortal()">Enter Portal</button>
   </div>
@@ -210,9 +217,9 @@ body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); height: 100vh; ove
 <div id="appView">
   <div class="app-header">
     <div class="app-header-title" id="appHeaderTitle">Dhainagar High School</div>
-    <div>
-      <button class="app-btn-logout" onclick="closeAppToDashboard()" style="background:#0D47A1; margin-right: 5px;">ড্যাশবোর্ড (Back)</button>
-      <button class="app-btn-logout" onclick="handleLogoutFromApp()">লগআউট (Logout)</button>
+    <div style="display:flex; gap:5px;">
+      <button class="app-btn-logout" onclick="closeAppToDashboard()" style="background:#0D47A1;">ড্যাশবোর্ড</button>
+      <button class="app-btn-logout" onclick="handleLogoutFromApp()">লগআউট</button>
     </div>
   </div>
   <iframe id="appIframe" src=""></iframe>
@@ -294,6 +301,7 @@ function handleLogin() {
 
 // Iframe Functions
 function openApp(url, title) {
+  document.body.style.overflow = "hidden"; // Prevent background scrolling
   document.getElementById("mainContainer").style.display = "none";
   document.getElementById("appView").style.display = "flex";
   document.getElementById("appHeaderTitle").innerText = title;
@@ -301,6 +309,7 @@ function openApp(url, title) {
 }
 
 function closeAppToDashboard() {
+  document.body.style.overflow = "auto"; // Restore background scrolling
   document.getElementById("appView").style.display = "none";
   document.getElementById("appIframe").src = ""; 
   document.getElementById("mainContainer").style.display = "block";
@@ -318,6 +327,7 @@ function handleLogout() {
 }
 
 function handleLogoutFromApp() {
+  document.body.style.overflow = "auto"; 
   document.getElementById("appView").style.display = "none";
   document.getElementById("appIframe").src = ""; 
   document.getElementById("mainContainer").style.display = "block";
