@@ -11,10 +11,66 @@
 * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
 body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; }
 
-/* Main Container (Login & Dashboard) */
-.container { background: #ffffff; width: 90%; max-width: 450px; padding: 30px 20px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); text-align: center; position: relative; }
+/* ======================== 
+   Welcome Page Styles 
+======================== */
+#welcomeSection { 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+  width: 100%; 
+  height: 100vh; 
+  background: linear-gradient(135deg, #1565C0, #0D47A1); 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  z-index: 50; 
+  transition: opacity 0.8s ease, transform 0.8s ease; 
+}
 
-/* School Header & Logo */
+.welcome-content { text-align: center; color: white; animation: fadeIn 1s ease-in-out; }
+
+.welcome-logo { 
+  width: 120px; 
+  height: 120px; 
+  object-fit: contain; 
+  margin-bottom: 20px; 
+  background: white; 
+  border-radius: 50%; 
+  padding: 10px; 
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3); 
+  animation: float 3s ease-in-out infinite; 
+}
+
+.welcome-title { font-size: 28px; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+.welcome-subtitle { font-size: 16px; color: #bbdefb; margin-bottom: 40px; }
+
+.btn-enter { 
+  background: white; 
+  color: #1565C0; 
+  border: none; 
+  padding: 12px 40px; 
+  font-size: 18px; 
+  font-weight: bold; 
+  border-radius: 30px; 
+  cursor: pointer; 
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
+  transition: transform 0.2s, box-shadow 0.2s; 
+}
+.btn-enter:hover { transform: scale(1.05); box-shadow: 0 6px 15px rgba(0,0,0,0.3); }
+
+@keyframes fadeIn { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+@keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+
+/* ======================== 
+   Main Container (Login & Dashboard) 
+======================== */
+.container { background: #ffffff; width: 90%; max-width: 450px; padding: 30px 20px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); text-align: center; position: relative; display: none; opacity: 0; animation: popUp 0.6s forwards; }
+
+@keyframes popUp { 0% { transform: scale(0.9); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+/* School Header & Logo (Inside Login) */
 .school-header { margin-bottom: 25px; }
 .logo-container { width: 90px; height: 90px; margin: 0 auto 15px auto; border-radius: 50%; padding: 5px; background: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); animation: pulse 2s infinite; }
 .school-logo { width: 100%; height: 100%; object-fit: contain; }
@@ -61,15 +117,10 @@ body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); height: 100vh; ove
 .modal-text { font-size: 14px; color: #333; margin-bottom: 20px; line-height: 1.4; font-weight: bold; }
 .modal-btn { background: #d32f2f; color: white; border: none; padding: 8px 25px; border-radius: 4px; font-size: 14px; cursor: pointer; font-weight: bold; width: auto; }
 
-@keyframes popIn {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
 /* ======================== 
    Iframe Application View 
 ======================== */
-#appView { display: none; width: 100%; height: 100vh; flex-direction: column; background: #fff; }
+#appView { display: none; width: 100%; height: 100vh; flex-direction: column; background: #fff; position: absolute; top:0; left:0; z-index: 100;}
 .app-header { background: #1565C0; color: white; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 10; }
 .app-header-title { font-weight: bold; font-size: 16px; }
 .app-btn-logout { background: #c62828; color: white; border: none; padding: 6px 15px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 13px; }
@@ -89,11 +140,24 @@ body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); height: 100vh; ove
   </div>
 </div>
 
+<!-- Welcome Section -->
+<div id="welcomeSection">
+  <div class="welcome-content">
+    <!-- Using the specific logo you requested for Welcome Page -->
+    <img src="Picsart_26-09-13_11-05-08-137.png" onerror="this.src='https://drive.google.com/thumbnail?id=1kL6r0VnNS1owRNkBsXabtXJ8JbgH4Bpx&sz=w300';" alt="Welcome Logo" class="welcome-logo">
+    <h1 class="welcome-title">Welcome to</h1>
+    <h2 style="font-size: 22px; margin-bottom: 5px;">DHAINAGAR HIGH SCHOOL</h2>
+    <p class="welcome-subtitle">Digital School Management Portal</p>
+    <button class="btn-enter" onclick="enterPortal()">Enter Portal</button>
+  </div>
+</div>
+
 <!-- Main Login/Dashboard Container -->
 <div class="container" id="mainContainer">
   
   <div class="school-header">
     <div class="logo-container">
+      <!-- Original Drive Logo for Login Page -->
       <img src="https://drive.google.com/thumbnail?id=1kL6r0VnNS1owRNkBsXabtXJ8JbgH4Bpx&sz=w300" onerror="this.src='https://via.placeholder.com/90?text=Logo';" alt="School Logo" class="school-logo">
     </div>
     <div class="header-text">
@@ -147,8 +211,8 @@ body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); height: 100vh; ove
   <div class="app-header">
     <div class="app-header-title" id="appHeaderTitle">Dhainagar High School</div>
     <div>
-      <button class="app-btn-logout" onclick="closeAppToDashboard()">ড্যাশবোর্ড (Back)</button>
-      <button class="app-btn-logout" onclick="handleLogoutFromApp()" style="margin-left: 5px;">লগআউট (Logout)</button>
+      <button class="app-btn-logout" onclick="closeAppToDashboard()" style="background:#0D47A1; margin-right: 5px;">ড্যাশবোর্ড (Back)</button>
+      <button class="app-btn-logout" onclick="handleLogoutFromApp()">লগআউট (Logout)</button>
     </div>
   </div>
   <iframe id="appIframe" src=""></iframe>
@@ -166,6 +230,18 @@ function generateCaptcha() {
 window.onload = function() {
   generateCaptcha();
 };
+
+// Enter Portal Animation
+function enterPortal() {
+  var welcomeSec = document.getElementById("welcomeSection");
+  welcomeSec.style.opacity = "0";
+  welcomeSec.style.transform = "scale(1.1)";
+  
+  setTimeout(function() {
+    welcomeSec.style.display = "none";
+    document.getElementById("mainContainer").style.display = "block";
+  }, 600); // Waits for the animation to finish
+}
 
 function togglePass() {
   var passField = document.getElementById("password");
@@ -218,7 +294,6 @@ function handleLogin() {
 
 // Iframe Functions
 function openApp(url, title) {
-  document.body.style.alignItems = "stretch"; // Remove center alignment
   document.getElementById("mainContainer").style.display = "none";
   document.getElementById("appView").style.display = "flex";
   document.getElementById("appHeaderTitle").innerText = title;
@@ -226,9 +301,8 @@ function openApp(url, title) {
 }
 
 function closeAppToDashboard() {
-  document.body.style.alignItems = "center"; // Restore center alignment
   document.getElementById("appView").style.display = "none";
-  document.getElementById("appIframe").src = ""; // Clear iframe
+  document.getElementById("appIframe").src = ""; 
   document.getElementById("mainContainer").style.display = "block";
   document.getElementById("dashboardSection").style.display = "block";
 }
@@ -244,12 +318,11 @@ function handleLogout() {
 }
 
 function handleLogoutFromApp() {
-  document.body.style.alignItems = "center"; 
   document.getElementById("appView").style.display = "none";
   document.getElementById("appIframe").src = ""; 
   document.getElementById("mainContainer").style.display = "block";
   
-  handleLogout(); // Call the main logout logic
+  handleLogout(); 
 }
 </script>
 
