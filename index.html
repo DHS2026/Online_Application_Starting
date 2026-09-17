@@ -65,9 +65,12 @@ body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); min-height: 100vh;
 @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
 
 /* ======================== 
-   Main Container (Login & Dashboard) 
+   Main Container (Login)
 ======================== */
 .container { background: #ffffff; width: 90%; max-width: 450px; padding: 30px 20px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); text-align: center; position: relative; display: none; opacity: 0; animation: popUp 0.6s forwards; margin: auto; }
+
+/* Dashboard Container (Wider for Grid Layout) */
+.dashboard-container { background: transparent; width: 95%; max-width: 900px; padding: 10px; text-align: center; display: none; opacity: 0; animation: popUp 0.6s forwards; margin: auto; }
 
 @keyframes popUp { 0% { transform: scale(0.9); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 
@@ -85,7 +88,6 @@ body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); min-height: 100vh;
 }
 
 /* Login Section */
-#loginSection { display: block; }
 .input-group { margin-bottom: 15px; text-align: left; position: relative; }
 .input-group label { display: block; font-size: 13px; font-weight: bold; color: #333; margin-bottom: 5px; }
 .input-group input { width: 100%; padding: 10px 12px; font-size: 15px; border: 1px solid #ccc; border-radius: 6px; outline: none; transition: border-color 0.3s; }
@@ -97,26 +99,56 @@ body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); min-height: 100vh;
 .captcha-code { font-size: 22px; font-weight: bold; letter-spacing: 5px; color: #c62828; font-family: 'Courier New', Courier, monospace; text-decoration: line-through; user-select: none; }
 .refresh-captcha { cursor: pointer; color: #1565C0; font-size: 20px; font-weight: bold; }
 
-/* Dashboard Section */
-#dashboardSection { display: none; }
-.dashboard-title { font-size: 15px; color: #333; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px dashed #ddd; }
+.login-btn { display: block; width: 100%; padding: 12px; font-size: 15px; font-weight: bold; color: white; background: #1565C0; border: none; border-radius: 6px; cursor: pointer; transition: background 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+.login-btn:hover { background: #0D47A1; }
 
-.action-btn { display: block; width: 100%; padding: 12px; margin-bottom: 15px; font-size: 14px; font-weight: bold; color: white; background: #1565C0; border: none; border-radius: 6px; cursor: pointer; transition: background 0.3s, transform 0.1s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-decoration: none;}
-.action-btn:hover { background: #0D47A1; }
-.action-btn:active { transform: scale(0.98); }
-.btn-xi { background: #2e7d32; }
-.btn-xi:hover { background: #1b5e20; }
-.btn-reg { background: #e65100; }
-.btn-reg:hover { background: #bf360c; }
-.btn-logout { background: #c62828; margin-top: 25px; }
-.btn-logout:hover { background: #b71c1c; }
+/* ======================== 
+   Dashboard Professional Layout 
+======================== */
+.dash-topbar { background: #fff; padding: 15px 20px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
+.dash-brand { display: flex; align-items: center; gap: 12px; }
+.dash-brand img { width: 45px; height: 45px; object-fit: contain; }
+.dash-brand-text { text-align: left; }
+.dash-brand-text h2 { font-size: 16px; color: #1565C0; margin: 0; }
+.dash-brand-text p { font-size: 11px; color: #777; margin: 0; }
 
-/* Custom Popup Modal */
+.top-logout-btn { background: #ffebee; color: #c62828; border: 1px solid #ffcdd2; padding: 8px 15px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 13px; transition: 0.3s; display: flex; align-items: center; gap: 5px; }
+.top-logout-btn:hover { background: #c62828; color: #fff; }
+
+/* Grid Modules */
+.module-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; padding: 10px 0; }
+
+.module-card { background: #fff; border-radius: 12px; padding: 20px; text-align: left; box-shadow: 0 6px 15px rgba(0,0,0,0.08); transition: transform 0.3s, box-shadow 0.3s; border-top: 4px solid #1565C0; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; }
+.module-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.15); }
+
+.module-card.theme-green { border-top-color: #2e7d32; }
+.module-card.theme-orange { border-top-color: #e65100; }
+
+.mod-header { display: flex; align-items: center; gap: 15px; margin-bottom: 12px; }
+.mod-icon { width: 45px; height: 45px; border-radius: 8px; background: #e3f2fd; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+.theme-green .mod-icon { background: #e8f5e9; }
+.theme-orange .mod-icon { background: #fff3e0; }
+
+.mod-title { font-size: 16px; font-weight: bold; color: #333; }
+.mod-desc { font-size: 12px; color: #666; margin-bottom: 20px; line-height: 1.4; flex-grow: 1; }
+
+.mod-btn { width: 100%; padding: 10px; font-size: 13px; font-weight: bold; border-radius: 6px; border: none; cursor: pointer; color: #fff; background: #1565C0; transition: 0.2s; }
+.mod-btn:hover { background: #0D47A1; }
+
+.theme-green .mod-btn { background: #2e7d32; }
+.theme-green .mod-btn:hover { background: #1b5e20; }
+
+.theme-orange .mod-btn { background: #e65100; }
+.theme-orange .mod-btn:hover { background: #bf360c; }
+
+/* ======================== 
+   Custom Popup Modal 
+======================== */
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 9999; backdrop-filter: blur(2px); }
 .modal-box { background: #fff; padding: 25px; border-radius: 8px; max-width: 320px; width: 90%; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3); border-top: 5px solid #d32f2f; animation: popIn 0.3s ease-out; }
 .modal-title { color: #d32f2f; margin-top: 0; font-size: 18px; margin-bottom: 10px; }
 .modal-text { font-size: 14px; color: #333; margin-bottom: 20px; line-height: 1.4; font-weight: bold; }
-.modal-btn { background: #d32f2f; color: white; border: none; padding: 8px 25px; border-radius: 4px; font-size: 14px; cursor: pointer; font-weight: bold; width: auto; }
+.modal-btn-ok { background: #d32f2f; color: white; border: none; padding: 8px 25px; border-radius: 4px; font-size: 14px; cursor: pointer; font-weight: bold; width: auto; }
 
 /* ======================== 
    Iframe Application View 
@@ -128,12 +160,11 @@ body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); min-height: 100vh;
 .app-btn-logout:hover { background: #b71c1c; }
 #appIframe { flex-grow: 1; width: 100%; border: none; background: #f2f4f8; }
 
-/* Responsive text for very small screens */
-@media (max-width: 360px) {
-  .header-text h2 { font-size: 18px;}
-  .welcome-title { font-size: 20px;}
-  .welcome-subtitle { font-size: 14px;}
-  .app-header-title { font-size: 13px;}
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .dash-brand-text h2 { font-size: 14px; }
+  .dash-brand img { width: 35px; height: 35px; }
+  .top-logout-btn { padding: 6px 10px; font-size: 12px; }
 }
 </style>
 </head>
@@ -144,7 +175,7 @@ body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); min-height: 100vh;
   <div class="modal-box">
     <h3 class="modal-title">সতর্কবার্তা</h3>
     <div id="modalMsg" class="modal-text"></div>
-    <button class="modal-btn" onclick="closeModal()">ঠিক আছে (OK)</button>
+    <button class="modal-btn-ok" onclick="closeModal()">ঠিক আছে (OK)</button>
   </div>
 </div>
 
@@ -159,12 +190,10 @@ body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); min-height: 100vh;
   </div>
 </div>
 
-<!-- Main Login/Dashboard Container -->
+<!-- Main Login Container -->
 <div class="container" id="mainContainer">
-  
   <div class="school-header">
     <div class="logo-container">
-      <!-- Original Drive Logo for Login Page -->
       <img src="https://drive.google.com/thumbnail?id=1kL6r0VnNS1owRNkBsXabtXJ8JbgH4Bpx&sz=w300" onerror="this.src='https://via.placeholder.com/90?text=Logo';" alt="School Logo" class="school-logo">
     </div>
     <div class="header-text">
@@ -173,7 +202,6 @@ body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); min-height: 100vh;
     </div>
   </div>
 
-  <!-- Login Section -->
   <div id="loginSection">
     <div class="input-group">
       <label for="password">পাসওয়ার্ড (Password)</label>
@@ -191,29 +219,64 @@ body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); min-height: 100vh;
       <input type="number" inputmode="numeric" pattern="[0-9]*" id="captchaInput" placeholder="৪ ডিজিটের নম্বর লিখুন">
     </div>
 
-    <button class="action-btn" onclick="handleLogin()">প্রবেশ করুন (Login)</button>
+    <button class="login-btn" onclick="handleLogin()">প্রবেশ করুন (Login)</button>
   </div>
-
-  <!-- Dashboard Section -->
-  <div id="dashboardSection">
-    <div class="dashboard-title">দয়া করে আপনার প্রয়োজনীয় অপশনটি নির্বাচন করুন:</div>
-    
-    <!-- Link 1 opens in Iframe -->
-    <button class="action-btn" onclick="openApp('https://script.google.com/macros/s/AKfycbwzW_FF09jgx8KkH9wTWkBmxUrIJmt7S-Hp8kBAA5-PM8PXh7yln5P0f2QcxnnbM9Da/exec', 'Admission Form (V to IX)')">Admission Form (Class V to IX)</button>
-    
-    <!-- Link 2 (Indicator) -->
-    <button class="action-btn btn-xi" onclick="openApp('https://script.google.com/macros/s/AKfycbyVT4S90P3SDQS-0gNGG0D8KUMc7xTehP4gDj3TAZQvlflbQT2m3kAr5xAR3CxsZ6FP/exec', 'Admisson form (Class XI)')">Admission Form (Class XI)</button>
-    
-    <!-- Link 3 (Indicator) -->
-    <button class="action-btn btn-reg" onclick="openApp('https://script.google.com/macros/s/AKfycbxJhmj7dMvM_SzgzsTNfgphebiIoEg8gB8dtrVIyAAYf_ie-RliUY6N-E0bXMsmviZT/exec' 'IX Registration')">Registration Form (Class IX)</button>
-    
-    <!-- Logout -->
-    <button class="action-btn btn-logout" onclick="handleLogout()">লগআউট করুন (Logout)</button>
-  </div>
-
 </div>
 
-<!-- Full Screen Iframe View (Hidden initially) -->
+<!-- Dashboard Section (Professional Module Grid) -->
+<div class="dashboard-container" id="dashboardContainer">
+  
+  <!-- Dashboard Top Bar -->
+  <div class="dash-topbar">
+    <div class="dash-brand">
+      <img src="https://drive.google.com/thumbnail?id=1kL6r0VnNS1owRNkBsXabtXJ8JbgH4Bpx&sz=w300" alt="Logo">
+      <div class="dash-brand-text">
+        <h2>DHAINAGAR HIGH SCHOOL</h2>
+        <p>Administrative Dashboard</p>
+      </div>
+    </div>
+    <button class="top-logout-btn" onclick="handleLogout()">
+      <span>🚪</span> Logout
+    </button>
+  </div>
+
+  <!-- Modules Grid -->
+  <div class="module-grid">
+    
+    <!-- Module 1: V to IX -->
+    <div class="module-card" onclick="openApp('https://script.google.com/macros/s/AKfycbwzW_FF09jgx8KkH9wTWkBmxUrIJmt7S-Hp8kBAA5-PM8PXh7yln5P0f2QcxnnbM9Da/exec', 'Admission Form (V to IX)')">
+      <div class="mod-header">
+        <div class="mod-icon">🏫</div>
+        <div class="mod-title">Junior Section Admission</div>
+      </div>
+      <div class="mod-desc">Online admission form for Class V to Class IX students.</div>
+      <button class="mod-btn">Open Module</button>
+    </div>
+
+    <!-- Module 2: XI (Theme Green) -->
+    <div class="module-card theme-green" onclick="openApp('https://script.google.com/macros/s/AKfycbyVT4S90P3SDQS-0gNGG0D8KUMc7xTehP4gDj3TAZQvlflbQT2m3kAr5xAR3CxsZ6FP/exec', 'Admisson form (Class XI)')">
+      <div class="mod-header">
+        <div class="mod-icon">🎓</div>
+        <div class="mod-title">Higher Secondary Admission</div>
+      </div>
+      <div class="mod-desc">Dedicated admission portal for Class XI new enrollments.</div>
+      <button class="mod-btn">Open Module</button>
+    </div>
+
+    <!-- Module 3: IX Registration (Theme Orange) -->
+    <div class="module-card theme-orange" onclick="openApp('https://script.google.com/macros/s/AKfycbxJhmj7dMvM_SzgzsTNfgphebiIoEg8gB8dtrVIyAAYf_ie-RliUY6N-E0bXMsmviZT/exec', 'IX Registration')">
+      <div class="mod-header">
+        <div class="mod-icon">📋</div>
+        <div class="mod-title">MP Registration (Class IX)</div>
+      </div>
+      <div class="mod-desc">Madhyamik Pariksha registration form and data collection.</div>
+      <button class="mod-btn">Open Module</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- Full Screen Iframe View -->
 <div id="appView">
   <div class="app-header">
     <div class="app-header-title" id="appHeaderTitle">Dhainagar High School</div>
@@ -238,16 +301,14 @@ window.onload = function() {
   generateCaptcha();
 };
 
-// Enter Portal Animation
 function enterPortal() {
   var welcomeSec = document.getElementById("welcomeSection");
   welcomeSec.style.opacity = "0";
   welcomeSec.style.transform = "scale(1.1)";
-  
   setTimeout(function() {
     welcomeSec.style.display = "none";
     document.getElementById("mainContainer").style.display = "block";
-  }, 600); // Waits for the animation to finish
+  }, 600);
 }
 
 function togglePass() {
@@ -292,33 +353,32 @@ function handleLogin() {
     return;
   }
 
-  document.getElementById("loginSection").style.display = "none";
-  document.getElementById("dashboardSection").style.display = "block";
+  // Switch to Professional Dashboard
+  document.getElementById("mainContainer").style.display = "none";
+  document.getElementById("dashboardContainer").style.display = "block";
   
   document.getElementById("password").value = "";
   document.getElementById("captchaInput").value = "";
 }
 
-// Iframe Functions
 function openApp(url, title) {
-  document.body.style.overflow = "hidden"; // Prevent background scrolling
-  document.getElementById("mainContainer").style.display = "none";
+  document.body.style.overflow = "hidden";
+  document.getElementById("dashboardContainer").style.display = "none";
   document.getElementById("appView").style.display = "flex";
   document.getElementById("appHeaderTitle").innerText = title;
   document.getElementById("appIframe").src = url;
 }
 
 function closeAppToDashboard() {
-  document.body.style.overflow = "auto"; // Restore background scrolling
+  document.body.style.overflow = "auto";
   document.getElementById("appView").style.display = "none";
   document.getElementById("appIframe").src = ""; 
-  document.getElementById("mainContainer").style.display = "block";
-  document.getElementById("dashboardSection").style.display = "block";
+  document.getElementById("dashboardContainer").style.display = "block";
 }
 
 function handleLogout() {
-  document.getElementById("dashboardSection").style.display = "none";
-  document.getElementById("loginSection").style.display = "block";
+  document.getElementById("dashboardContainer").style.display = "none";
+  document.getElementById("mainContainer").style.display = "block";
   
   var passField = document.getElementById("password");
   passField.type = "password";
@@ -330,7 +390,6 @@ function handleLogoutFromApp() {
   document.body.style.overflow = "auto"; 
   document.getElementById("appView").style.display = "none";
   document.getElementById("appIframe").src = ""; 
-  document.getElementById("mainContainer").style.display = "block";
   
   handleLogout(); 
 }
