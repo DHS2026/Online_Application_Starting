@@ -9,7 +9,8 @@
    Global Styles 
 ======================== */
 * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
-body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow-y: auto; padding: 20px 0; }
+/* Added bottom padding to avoid overlap with the fixed footer */
+body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow-y: auto; padding: 20px 0 60px 0; }
 
 /* ======================== 
    Welcome Page Styles 
@@ -173,7 +174,7 @@ body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); min-height: 100vh;
 .loading-overlay {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: #ffffff; /* Solid White to hide flash */
+  background: #ffffff; 
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -196,11 +197,47 @@ body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); min-height: 100vh;
 
 .loading-text { color: #1565C0; font-size: 15px; font-weight: bold; letter-spacing: 0.5px; }
 
+/* ======================== 
+   Professional Footer 
+======================== */
+.school-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #0D47A1;
+  color: #ffffff;
+  text-align: center;
+  padding: 12px 15px;
+  font-size: 13px;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+.school-footer p {
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.footer-subtext {
+  font-size: 11px;
+  color: #bbdefb;
+  margin-top: 5px !important;
+}
+
 /* Responsive adjustments */
 @media (max-width: 480px) {
   .dash-brand-text h2 { font-size: 14px; }
   .dash-brand img { width: 35px; height: 35px; }
   .top-logout-btn { padding: 6px 10px; font-size: 12px; }
+  
+  .school-footer {
+    padding: 10px;
+    font-size: 12px;
+  }
+  .footer-subtext {
+    font-size: 10px;
+  }
 }
 </style>
 </head>
@@ -341,6 +378,12 @@ body { background: linear-gradient(135deg, #e3f2fd, #bbdefb); min-height: 100vh;
     <iframe id="appIframe" src=""></iframe>
   </div>
 </div>
+
+<!-- Footer Section -->
+<footer class="school-footer">
+  <p>&copy; 2026 <strong>Dhainagar High School [H.S.]</strong>. All rights reserved.</p>
+  <p class="footer-subtext">Online Admission Portal &bull; Designed for Better Education</p>
+</footer>
 
 <script>
 let currentCaptcha = "";
